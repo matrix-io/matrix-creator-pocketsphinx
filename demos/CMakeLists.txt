@@ -9,11 +9,14 @@ ADM_EXTRA_WARNINGS()
 
 find_package(Threads)
 find_package(PkgConfig)
+FIND_LIBRARY(HAL_LIB NAMES matrix_creator_hal)
 
 pkg_search_module(SPHINXBASE REQUIRED sphinxbase)
 pkg_search_module(POCKETSPHINX REQUIRED pocketsphinx)
 
-add_subdirectory(../cpp/driver driver)
+message(STATUS "HAL found => " "${HAL_LIB}")
+message(STATUS "SPHINXBASE found => " "${SPHINXBASE_LIBRARIES}")
+message(STATUS "POCKETSPHINX found => " "${POCKETSPHINX_LIBRARIES}")
 
 add_executable(compass_demo compass_demo.cpp)
 set_property(TARGET compass_demo PROPERTY CXX_STANDARD 11)
@@ -100,11 +103,6 @@ add_executable(ipaddress_demo ipaddress_demo.cpp)
 set_property(TARGET ipaddress_demo PROPERTY CXX_STANDARD 11)
 target_link_libraries(ipaddress_demo matrix_creator_hal)
 target_link_libraries(ipaddress_demo ${CMAKE_THREAD_LIBS_INIT})
-
-add_executable(firmware_info firmware_info.cpp)
-set_property(TARGET firmware_info PROPERTY CXX_STANDARD 11)
-target_link_libraries(firmware_info matrix_creator_hal)
-target_link_libraries(firmware_info ${CMAKE_THREAD_LIBS_INIT})
 
 add_executable(sensors_status sensors_status.cpp)
 set_property(TARGET sensors_status PROPERTY CXX_STANDARD 11)
