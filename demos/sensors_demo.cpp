@@ -20,17 +20,17 @@
 #include <iostream>
 #include <iomanip>
 
-#include "../cpp/driver/wishbone_bus.h"
-#include "../cpp/driver/fw_data.h"
-#include "../cpp/driver/mcu_firmware.h"
-#include "../cpp/driver/imu_data.h"
-#include "../cpp/driver/imu_sensor.h"
-#include "../cpp/driver/pressure_data.h"
-#include "../cpp/driver/pressure_sensor.h"
-#include "../cpp/driver/humidity_data.h"
-#include "../cpp/driver/humidity_sensor.h"
-#include "../cpp/driver/uv_sensor.h"
-#include "../cpp/driver/uv_data.h"
+#include "matrix_hal/wishbone_bus.h"
+#include "matrix_hal/fw_data.h"
+#include "matrix_hal/mcu_firmware.h"
+#include "matrix_hal/imu_data.h"
+#include "matrix_hal/imu_sensor.h"
+#include "matrix_hal/pressure_data.h"
+#include "matrix_hal/pressure_sensor.h"
+#include "matrix_hal/humidity_data.h"
+#include "matrix_hal/humidity_sensor.h"
+#include "matrix_hal/uv_sensor.h"
+#include "matrix_hal/uv_data.h"
 
 namespace hal = matrix_hal;
 
