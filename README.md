@@ -1,7 +1,4 @@
-# MATRIX HAL DEMOS
-
-
-## Pocketsphinx demo
+# Pocketsphinx demo
 
 ### Dependencies 
 
@@ -20,23 +17,31 @@ sudo apt-get update
 sudo apt-get install libblas-dev liblapack-dev pocketsphinx --no-install-recommends
 ```
 
-### Building
+### Building HAL library
 ``` 
 git clone https://github.com/matrix-io/matrix-creator-hal.git hal
 cd matrix-creator-hal
-git checkout av/pocketsphinx_demo
+mkdir build && cd build && cmake .. && make
+make install
+```
+
+### Building PocketSphinx demo
+``` 
+git https://github.com/matrix-io/matrix-creator-pocketsphinx.git
+cd matrix-creator-pocketsphinx
 mkdir build && cd build && cmake .. && make
 ```
 
-### Install testing commands:
+### Install testing voice commands:
 Download sample language and dictionary from [here](https://drive.google.com/file/d/0B3lA7p7SjZu-YUJxYmIwcnh4Qlk/view?usp=sharing) or make new models (explanation below) then extract it:
 ```
 cd demos
 mkdir assets
 tar xf TAR6706.tgz -C assets
 ```
+
 ### Run DEMO:
-on matrix-creator-hal/build/demos:
+on build/demos:
 ```
 ./pocketsphinx_demo -keyphrase "MATRIX" -kws_threshold 1e-20 -dict assets/6706.dic -lm assets/6706.lm -inmic yes -adcdev mic_channel8
 ``` 
@@ -73,23 +78,3 @@ matrix ten minutes
 
 + Dowload *TARXXXXX.tgz* and upgrade assets: 
 
-
-## IP Address DEMO
-on matrix-creator-hal/build/demos:
-```
-./ipaddress_demo
-```
-IP Address demo print the last integer of wlan0 IP address, for example if RasberryPi has a 192.168.0.135 IP the everloop ring show it like this:
-> [yellow led] one blue led    (1)
-> [yellow led] three blue leds (3)
-> [yellow led] five blue leds  (5)
-
-## Timer DEMO
-on matrix-creator-hal/build/demos:
-```
-./timer_demo
-```
-optional options:
-```
-./timer_demo seconds
-```
