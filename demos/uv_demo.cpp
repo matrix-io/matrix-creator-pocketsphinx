@@ -20,11 +20,11 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "../cpp/driver/everloop_image.h"
-#include "../cpp/driver/everloop.h"
-#include "../cpp/driver/uv_sensor.h"
-#include "../cpp/driver/uv_data.h"
-#include "../cpp/driver/wishbone_bus.h"
+#include "matrix_hal/everloop_image.h"
+#include "matrix_hal/everloop.h"
+#include "matrix_hal/uv_sensor.h"
+#include "matrix_hal/uv_data.h"
+#include "matrix_hal/wishbone_bus.h"
 
 /* UV Index
 

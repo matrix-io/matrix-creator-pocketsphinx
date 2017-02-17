@@ -24,9 +24,9 @@
 #include <string.h>
 #include <cstring>
 
-#include "../cpp/driver/everloop_image.h"
-#include "../cpp/driver/everloop.h"
-#include "../cpp/driver/wishbone_bus.h"
+#include "matrix_hal/everloop_image.h"
+#include "matrix_hal/everloop.h"
+#include "matrix_hal/wishbone_bus.h"
 
 namespace hal = matrix_hal;
 
