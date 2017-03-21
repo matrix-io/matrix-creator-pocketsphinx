@@ -12,17 +12,9 @@ reboot
 ```
 Add some dependencies and pocketsphinx package
 ```
-echo "deb http://dev-packages.matrix.one/ stable main" | sudo tee -a /etc/apt/sources.list
+echo "deb http://unstable-packages.matrix.one/ stable main" | sudo tee -a /etc/apt/sources.list
 sudo apt-get update
 sudo apt-get install libblas-dev liblapack-dev pocketsphinx --no-install-recommends
-```
-
-### Building HAL library
-``` 
-git clone https://github.com/matrix-io/matrix-creator-hal.git hal
-cd matrix-creator-hal
-mkdir build && cd build && cmake .. && make
-make install
 ```
 
 ### Building PocketSphinx demo
