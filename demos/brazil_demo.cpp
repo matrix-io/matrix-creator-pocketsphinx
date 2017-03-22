@@ -37,11 +37,13 @@ int main() {
   unsigned counter = 0;
 
   while (1) {
+    std::cout << "Brazil: " << argv[1] << " 1.\n";
     for (hal::LedValue& led : image1d.leds) {
       led.yellow = 1;
       led.green = 1;
+      std::cout << "Brazil: " << argv[1] << " 2.\n";
     }
-    
+
     // image1d.leds[(counter / 2) % 35].red = 20;
     // image1d.leds[(counter / 7) % 35].green = 30;
     // image1d.leds[(counter / 11) % 35].blue = 30;
