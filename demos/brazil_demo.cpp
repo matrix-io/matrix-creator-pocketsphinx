@@ -36,21 +36,20 @@ int main() {
 
   unsigned counter = 0;
 
-  while (1) {
-    std::cout << "Brazil: " << " 1.\n";
+ while (1) {
     for (hal::LedValue& led : image1d.leds) {
-      led.blue = 1;
-      led.green = 1;
-      std::cout << "Brazil: " << " 2.\n";
+      led.red = 0;
+      led.green = 0;
+      led.blue = 0;
+      led.white = 0;
     }
+    image1d.leds[(counter / 2) % 35].blue = 20;
+    image1d.leds[(counter / 7) % 35].yellow = 30;
+    image1d.leds[(counter / 11) % 35].green = 30;
+    image1d.leds[34 - (counter % 35)].white = 10;
 
-    // image1d.leds[(counter / 2) % 35].red = 20;
-    // image1d.leds[(counter / 7) % 35].green = 30;
-    // image1d.leds[(counter / 11) % 35].blue = 30;
-    // image1d.leds[34 - (counter % 35)].white = 10;
-
-    // everloop.Write(&image1d);
-    // ++counter;
+    everloop.Write(&image1d);
+    ++counter;
     usleep(20000);
   }
 
