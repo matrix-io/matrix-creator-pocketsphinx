@@ -44,9 +44,9 @@ int main() {
       led.white = 0;
     }
     image1d.leds[(counter / 2) % 35].blue = 20;
-    image1d.leds[(counter / 7) % 35].yellow = 30;
     image1d.leds[(counter / 11) % 35].green = 30;
     image1d.leds[34 - (counter % 35)].white = 10;
+    image1d.leds[(counter / 7) % 35].blue = 30;
 
     everloop.Write(&image1d);
     ++counter;
