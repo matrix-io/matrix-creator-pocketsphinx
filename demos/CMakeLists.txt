@@ -33,6 +33,11 @@ set_property(TARGET uv_demo PROPERTY CXX_STANDARD 11)
 target_link_libraries(uv_demo matrix_creator_hal)
 target_link_libraries(uv_demo ${CMAKE_THREAD_LIBS_INIT})
 
+add_executable(brazil_demo brazil_demo.cpp)
+set_property(TARGET brazil_demo PROPERTY CXX_STANDARD 11)
+target_link_libraries(brazil_demo matrix_creator_hal)
+target_link_libraries(brazil_demo ${CMAKE_THREAD_LIBS_INIT})
+
 add_executable(clear_demo clear_demo.cpp)
 set_property(TARGET clear_demo PROPERTY CXX_STANDARD 11)
 target_link_libraries(clear_demo matrix_creator_hal)
