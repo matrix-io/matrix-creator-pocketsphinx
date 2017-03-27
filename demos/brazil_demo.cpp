@@ -34,30 +34,24 @@ int main() {
 
   everloop.Setup(&bus);
 
-  // unsigned counter = 0;
+  for (hal::LedValue& led : image1d.leds) {
+    led.red = 0;
+    led.green = 0;
+    led.blue = 0;
+    led.white = 0;
+  }
+  
+  for (int i = 0; i < 12; ++i){
+    image1d.leds[i].green = 20;
+  }
+  for (int i = 12; i < 23; ++i){
+    image1d.leds[i].white = 20;
+  }
+  for (int i = 23; i < 35; ++i){
+    image1d.leds[i].blue = 20;
+  }
 
- // while (1) {
-    for (hal::LedValue& led : image1d.leds) {
-      led.red = 0;
-      led.green = 0;
-      led.blue = 0;
-      led.white = 0;
-    }
-    
-    for (int i = 0; i < 12; ++i){
-      image1d.leds[i].green = 20;
-    }
-    for (int i = 12; i < 23; ++i){
-      image1d.leds[i].white = 20;
-    }
-    for (int i = 23; i < 35; ++i){
-      image1d.leds[i].blue = 20;
-    }
-
-    everloop.Write(&image1d);
-    // ++counter;
-    usleep(20000);
-  // }
+  everloop.Write(&image1d);
 
   return 0;
 }
