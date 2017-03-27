@@ -36,7 +36,7 @@ int main() {
 
   // unsigned counter = 0;
 
- // while (1) {
+ while (1) {
     for (hal::LedValue& led : image1d.leds) {
       led.red = 0;
       led.green = 0;
@@ -57,7 +57,7 @@ int main() {
     everloop.Write(&image1d);
     // ++counter;
     usleep(20000);
-  // }
+  }
 
   return 0;
 }
