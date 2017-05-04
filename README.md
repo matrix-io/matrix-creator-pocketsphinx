@@ -19,10 +19,23 @@ sudo apt-get install libblas-dev liblapack-dev pocketsphinx --no-install-recomme
 
 ### Building PocketSphinx demo
 ``` 
-git https://github.com/matrix-io/matrix-creator-pocketsphinx.git
+git clone https://github.com/carlaecomp/matrix-creator-pocketsphinx.git
 cd matrix-creator-pocketsphinx
 mkdir build && cd build && cmake .. && make
 ```
+### --------------
+http://www.speech.sri.com/projects/srilm/download.html
+mkdir srilm
+scp /home/carla/Documentos/Admobilize/srilm-1.7.2.tar.gz pi@192.168.15.29:/home/pi/matrix-creator-pocketsphinx/srilm 
+cd srilm
+tar xzf srilm-1.7.2.tar.gz
+sudo apt-get install tcl tcl-dev csh gawk
+In Makefile, uncomment the SRILM= parameter and point it to /usr/share/srilm (or your equivalent path)
+criar home/tools/user
+SRILM = /home/pi/matrix-creator-pocketsphinx/srilm
+----
+ngram-count -order 2 -interpolate -cdiscount1 0 -cdiscount2 0.5   -text train-text.txt -lm mymodel.lm
+--------------------------
 
 ### Install testing voice commands:
 Download sample language and dictionary from [here](https://drive.google.com/file/d/0B3lA7p7SjZu-YUJxYmIwcnh4Qlk/view?usp=sharing) or make new models (explanation below) then extract it:
