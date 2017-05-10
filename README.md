@@ -23,32 +23,42 @@ git clone https://github.com/carlaecomp/matrix-creator-pocketsphinx.git
 cd matrix-creator-pocketsphinx
 mkdir build && cd build && cmake .. && make
 ```
-### --------------
-http://www.speech.sri.com/projects/srilm/download.html
-mkdir srilm
-scp /home/carla/Documentos/Admobilize/srilm-1.7.2.tar.gz pi@192.168.15.29:/home/pi/matrix-creator-pocketsphinx/srilm 
-cd srilm
-tar xzf srilm-1.7.2.tar.gz
-sudo apt-get install tcl tcl-dev csh gawk
-In Makefile, uncomment the SRILM= parameter and point it to /usr/share/srilm (or your equivalent path)
-criar home/tools/user
-SRILM = /home/pi/matrix-creator-pocketsphinx/srilm
-----
-ngram-count -order 2 -interpolate -cdiscount1 0 -cdiscount2 0.5   -text train-text.txt -lm mymodel.lm
---------------------------
+### Generate the model
 
-### Install testing voice commands:
-Download sample language and dictionary from [here](https://drive.google.com/file/d/0B3lA7p7SjZu-YUJxYmIwcnh4Qlk/view?usp=sharing) or make new models (explanation below) then extract it:
+#### Install srilm in your computer
 ```
-cd demos
-mkdir assets
-tar xf TAR6706.tgz -C assets
+Download in http://www.speech.sri.com/projects/srilm/download.html
+
+If your computer is linux or mac:
+
+* mkdir /usr/share/srilm
+* mv srilm.tgz /usr/share/srilm
+* cd /usr/share/srilm
+* tar xzf srilm.tgz
+* sudo apt-get install tcl tcl-dev csh gawk
+* In Makefile, uncomment the SRILM= parameter and point it to /usr/share/srilm (or your equivalent path)
+
+Add the following to your .bashrc
+* SRILM=/usr/share/srilm
+* export PATH=$PATH:$SRILM/bin:$SRILM/bin/i686-ubuntu
+* export MANPATH=$SRILM/man:$MANPATH
+
+source : http://www.spencegreen.com/2012/02/01/installing-srilm-on-ubuntu-11-10/ 
+```
+#### Generate the model with srilm
+```
+* Go to the folder where your train-text is
+cd /folder/where/your/text/is
+* * Your train-text should be like the train-text in the folder config
+* Run the ngram-count that will generate the model
+ngram-count -order 2 -interpolate -cdiscount1 0 -cdiscount2 0.5   -text train-text.txt -lm model.lm
+* Move the mymodel.lm to /home/pi/matrix-creator-pocketsphinx/build/demos IN YOUR MATRIX
 ```
 
 ### Run DEMO:
 on build/demos:
 ```
-./pocketsphinx_demo -keyphrase "MATRIX" -kws_threshold 1e-20 -dict assets/6706.dic -lm assets/6706.lm -inmic yes -adcdev mic_channel8
+./pocketsphinx_demo -keyphrase "MATRIX" -kws_threshold 1e-20 -lm assets/model.lm -inmic yes -adcdev mic_channel8
 ``` 
 - *mic_channel8* (all microphones array)
 - *mic_channelX* (only X microphone)
