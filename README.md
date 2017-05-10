@@ -54,7 +54,7 @@ cd /folder/where/your/text/is
 ngram-count -order 2 -interpolate -cdiscount1 0 -cdiscount2 0.5   -text train-text.txt -lm model.lm
 ```
 - Your train-text should be like the train-text in the folder config
-- Move the mymodel.lm to /home/pi/matrix-creator-pocketsphinx/build/demos IN YOUR MATRIX
+- Move the model.lm to /home/pi/matrix-creator-pocketsphinx/build/demos IN YOUR MATRIX
 
 ### Run DEMO:
 on build/demos:
