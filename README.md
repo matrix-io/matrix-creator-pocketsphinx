@@ -36,15 +36,16 @@ mv srilm.tgz /usr/share/srilm
 cd /usr/share/srilm
 tar xzf srilm.tgz
 sudo apt-get install tcl tcl-dev csh gawk
-In Makefile, uncomment the SRILM= parameter and point it to /usr/share/srilm (or your equivalent path)
 ```
+- In Makefile, uncomment the SRILM= parameter and point it to /usr/share/srilm (or your equivalent path)
 - Add the following to your .bashrc
+
 ```
 SRILM=/usr/share/srilm
 export PATH=$PATH:$SRILM/bin:$SRILM/bin/i686-ubuntu
 export MANPATH=$SRILM/man:$MANPATH
 ```
-- source : http://www.spencegreen.com/2012/02/01/installing-srilm-on-ubuntu-11-10/ 
+- reference : http://www.spencegreen.com/2012/02/01/installing-srilm-on-ubuntu-11-10/ 
 
 #### Generate the model with srilm
 
