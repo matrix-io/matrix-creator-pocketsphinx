@@ -26,10 +26,12 @@ mkdir build && cd build && cmake .. && make
 ### Generate the model
 
 #### Install srilm in your computer
-```
-Download in http://www.speech.sri.com/projects/srilm/download.html
+- Download in http://www.speech.sri.com/projects/srilm/download.html
 
-If your computer is linux or mac:
+- If your computer is linux or mac:
+
+```
+
 
 - mkdir /usr/share/srilm
 - mv srilm.tgz /usr/share/srilm
