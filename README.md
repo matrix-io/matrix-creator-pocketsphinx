@@ -31,31 +31,29 @@ mkdir build && cd build && cmake .. && make
 - If your computer is linux or mac:
 
 ```
-
-
-- mkdir /usr/share/srilm
-- mv srilm.tgz /usr/share/srilm
-- cd /usr/share/srilm
-- tar xzf srilm.tgz
-- sudo apt-get install tcl tcl-dev csh gawk
-- In Makefile, uncomment the SRILM= parameter and point it to /usr/share/srilm (or your equivalent path)
-
-Add the following to your .bashrc
-- SRILM=/usr/share/srilm
-- export PATH=$PATH:$SRILM/bin:$SRILM/bin/i686-ubuntu
-- export MANPATH=$SRILM/man:$MANPATH
-
-source : http://www.spencegreen.com/2012/02/01/installing-srilm-on-ubuntu-11-10/ 
+mkdir /usr/share/srilm
+mv srilm.tgz /usr/share/srilm
+cd /usr/share/srilm
+tar xzf srilm.tgz
+sudo apt-get install tcl tcl-dev csh gawk
+In Makefile, uncomment the SRILM= parameter and point it to /usr/share/srilm (or your equivalent path)
 ```
+- Add the following to your .bashrc
+```
+SRILM=/usr/share/srilm
+export PATH=$PATH:$SRILM/bin:$SRILM/bin/i686-ubuntu
+export MANPATH=$SRILM/man:$MANPATH
+```
+- source : http://www.spencegreen.com/2012/02/01/installing-srilm-on-ubuntu-11-10/ 
+
 #### Generate the model with srilm
+
 ```
-- Go to the folder where your train-text is
 cd /folder/where/your/text/is
-- - Your train-text should be like the train-text in the folder config
-- Run the ngram-count that will generate the model
 ngram-count -order 2 -interpolate -cdiscount1 0 -cdiscount2 0.5   -text train-text.txt -lm model.lm
-- Move the mymodel.lm to /home/pi/matrix-creator-pocketsphinx/build/demos IN YOUR MATRIX
 ```
+- Your train-text should be like the train-text in the folder config
+- Move the mymodel.lm to /home/pi/matrix-creator-pocketsphinx/build/demos IN YOUR MATRIX
 
 ### Run DEMO:
 on build/demos:
