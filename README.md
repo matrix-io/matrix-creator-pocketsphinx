@@ -19,52 +19,31 @@ sudo apt-get install libblas-dev liblapack-dev pocketsphinx --no-install-recomme
 
 ### Building PocketSphinx demo
 ``` 
-git clone https://github.com/carlaecomp/matrix-creator-pocketsphinx.git
+git https://github.com/matrix-io/matrix-creator-pocketsphinx.git
 cd matrix-creator-pocketsphinx
 mkdir build && cd build && cmake .. && make
 ```
-### Generate the model
+### Model File
 
-#### Install srilm in your computer
-- Download in http://www.speech.sri.com/projects/srilm/download.html
+#### Option 1
 
-- If your computer is linux or mac:
-
+#### Install testing voice commands:
+Download sample language and dictionary from [here](https://drive.google.com/file/d/0B3lA7p7SjZu-YUJxYmIwcnh4Qlk/view?usp=sharing) or make new models (explanation below) then extract it:
 ```
-mkdir /usr/share/srilm
-mv srilm.tgz /usr/share/srilm
-cd /usr/share/srilm
-tar xzf srilm.tgz
-sudo apt-get install tcl tcl-dev csh gawk
+cd demos
+mkdir assets
+tar xf TAR6706.tgz -C assets
 ```
-- In Makefile, uncomment the SRILM= parameter and point it to /usr/share/srilm (or your equivalent path)
-- Add the following to your .bashrc
 
-```
-SRILM=/usr/share/srilm
-export PATH=$PATH:$SRILM/bin:$SRILM/bin/i686-ubuntu
-export MANPATH=$SRILM/man:$MANPATH
-```
-- reference : http://www.spencegreen.com/2012/02/01/installing-srilm-on-ubuntu-11-10/ 
-
-#### Generate the model with srilm
-
-```
-cd /folder/where/your/text/is
-ngram-count -order 2 -interpolate -cdiscount1 0 -cdiscount2 0.5   -text train-text.txt -lm model.lm
-```
-- Your train-text should be like the train-text in the folder config
-- Move the model.lm to /home/pi/matrix-creator-pocketsphinx/build/demos IN YOUR MATRIX
-
-### Run DEMO:
+#### Run DEMO:
 on build/demos:
 ```
-./pocketsphinx_demo -keyphrase "MATRIX" -kws_threshold 1e-20 -lm assets/model.lm -inmic yes -adcdev mic_channel8
+./pocketsphinx_demo -keyphrase "MATRIX" -kws_threshold 1e-20 -dict assets/6706.dic -lm assets/6706.lm -inmic yes -adcdev mic_channel8
 ``` 
 - *mic_channel8* (all microphones array)
 - *mic_channelX* (only X microphone)
 
-#### (optional) Custom lenguage and phrases for recognition 
+##### (optional) Custom lenguage and phrases for recognition 
 
 + Make a text plane like this: 
 ``` 
@@ -92,5 +71,50 @@ matrix ten minutes
 
 + Upload this file to [Sphinx Knowledge Base Tool](http://www.speech.cs.cmu.edu/tools/lmtool-new.html) and compile knowledge base.
 
-+ Dowload *TARXXXXX.tgz* and upgrade assets: 
++ Dowload *TARXXXXX.tgz* and upgrade assets:
+
+
+### Option 2
+#### Generate the model
+
+##### Install srilm in your computer
+- Download in http://www.speech.sri.com/projects/srilm/download.html
+
+- If your computer is linux or mac:
+
+```
+mkdir /usr/share/srilm
+mv srilm.tgz /usr/share/srilm
+cd /usr/share/srilm
+tar xzf srilm.tgz
+sudo apt-get install tcl tcl-dev csh gawk
+```
+- In Makefile, uncomment the SRILM= parameter and point it to /usr/share/srilm (or your equivalent path)
+- Add the following to your .bashrc
+
+```
+SRILM=/usr/share/srilm
+export PATH=$PATH:$SRILM/bin:$SRILM/bin/i686-ubuntu
+export MANPATH=$SRILM/man:$MANPATH
+```
+- reference : http://www.spencegreen.com/2012/02/01/installing-srilm-on-ubuntu-11-10/ 
+
+##### Generate the model with srilm
+
+```
+cd /folder/where/your/text/is
+ngram-count -order 2 -interpolate -cdiscount1 0 -cdiscount2 0.5   -text train-text.txt -lm model.lm
+```
+- Your train-text should be like the train-text in the folder config
+- Move the model.lm to /home/pi/matrix-creator-pocketsphinx/build/demos IN YOUR MATRIX
+
+#### Run DEMO:
+on build/demos:
+```
+./pocketsphinx_demo -keyphrase "MATRIX" -kws_threshold 1e-20 -lm assets/model.lm -inmic yes -adcdev mic_channel8
+``` 
+- *mic_channel8* (all microphones array)
+- *mic_channelX* (only X microphone)
+
+
 
