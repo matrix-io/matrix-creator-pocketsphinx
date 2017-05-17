@@ -75,6 +75,7 @@ static cmd_ln_t *config_;
 
 void process_rules(const char *hyp) {
   const std::string cmd_ever = "./everloop_demo &";
+  const std::string cmd_br = "./brazil_demo &";
   const std::string cmd_arc = "./arc_demo &";
   const std::string cmd_ipaddr = "./ipaddress_demo &";
   const std::string cmd_clear = "./clear_demo &";
@@ -92,6 +93,8 @@ void process_rules(const char *hyp) {
   printf("match: %s\n", hyp);
   if (std::strcmp(hyp, "MATRIX EVERLOOP") == 0)
     system(cmd_ever.c_str());
+  if (std::strcmp(hyp, "MATRIX BRAZIL") == 0)
+    system(cmd_br.c_str());
   if (std::strcmp(hyp, "MATRIX ARC") == 0)
     system(cmd_arc.c_str());
   if (std::strcmp(hyp, "MATRIX STOP") == 0)

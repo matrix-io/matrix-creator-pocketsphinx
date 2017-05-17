@@ -1,0 +1,21 @@
+<s> matrix </s>
+<s> everloop </s>
+<s> arc  </s>
+<s> clear </s>
+<s> stop </s>
+<s> shutdown </s>
+<s> now </s>
+<s> ipaddress </s>
+<s> matrix everloop </s>
+<s> matrix clear </s>
+<s> matrix stop </s>
+<s> matrix ipaddress </s>
+<s> matrix game time </s>
+<s> matrix one minute </s>
+<s> matrix two minutes </s>
+<s> matrix three minutes </s>
+<s> matrix four minutes </s>
+<s> matrix five minutes </s>
+<s> matrix ten seconds </s>
+<s> matrix ten minutes </s>
+<s> matrix brazil </s>
