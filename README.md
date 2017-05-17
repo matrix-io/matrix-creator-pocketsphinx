@@ -14,12 +14,12 @@ Add some dependencies and pocketsphinx package
 ```
 echo "deb http://unstable-packages.matrix.one/ stable main" | sudo tee -a /etc/apt/sources.list
 sudo apt-get update
-sudo apt-get install libblas-dev liblapack-dev pocketsphinx --no-install-recommends
+sudo apt-get install libblas-dev liblapack-dev libasound2-dev pocketsphinx --no-install-recommends
 ```
 
 ### Building PocketSphinx demo
 ``` 
-git https://github.com/matrix-io/matrix-creator-pocketsphinx.git
+git clone https://github.com/matrix-io/matrix-creator-pocketsphinx.git
 cd matrix-creator-pocketsphinx
 mkdir build && cd build && cmake .. && make
 ```
