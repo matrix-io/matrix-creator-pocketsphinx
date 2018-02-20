@@ -4,7 +4,7 @@
 
 ### Raspbian Dependencies 
 
-Before, please install **MALOS** on your `RaspberryPi3` and perform device reboot: 
+Before, please install **MALOS** service on your `RaspberryPi3` and perform device reboot: 
 
 ``` bash 
 curl https://apt.matrix.one/doc/apt-key.gpg | sudo apt-key add -
@@ -15,7 +15,7 @@ sudo apt install matrixio-malos-wakeword git build-essential cmake
 reboot
 ```
 
-### Testing to MALOS is running
+### Testing that MALOS is running
 
 ``` bash
 ps aux | grep -i malos
@@ -25,7 +25,7 @@ output:
 root       561  5.7  0.9 763616  8908 ?        Ssl  12:26   0:06 /usr/bin/malos
 root       562  0.0  0.5 122220  5640 ?        Ssl  12:26   0:00 /usr/bin/malos_wakeword
 ```
-**NOTE:** you can stop `malos_wakeword`, for pocketsphinx tests you don't need it. It's only for install dependencies like pocketsphinx and sphinxbase. If you want see more info about [malos_wakeword](https://github.com/matrix-io/matrix-malos-wakeword/blob/master/README.md)
+**NOTE:** you can stop `malos_wakeword`, for pocketsphinx tests you don't need it. It's only for installing dependencies like pocketsphinx and sphinxbase. If you want to see more info about [malos_wakeword](https://github.com/matrix-io/matrix-malos-wakeword/blob/master/README.md)
 
 ``` bash
 sudo service matrixio-malos-wakeword stop
@@ -46,7 +46,7 @@ mkdir assets
 tar zxf TAR6706.tgz -C assets
 ```
 
-**NOTE**: Optional: you can make new models [explanation below](https://github.com/matrix-io/matrix-creator-pocketsphinx#optional-custom-lenguage-and-phrases-for-recognition)
+**NOTE**: Optional, you can make new models [explanation below](https://github.com/matrix-io/matrix-creator-pocketsphinx#optional-custom-lenguage-and-phrases-for-recognition)
 
 ### Run DEMO:
 on build/demos:
