@@ -26,7 +26,7 @@
 
 #include "matrix_hal/everloop_image.h"
 #include "matrix_hal/everloop.h"
-#include "matrix_hal/wishbone_bus.h"
+#include "matrix_hal/matrixio_bus.h"
 
 namespace hal = matrix_hal;
 
@@ -43,11 +43,10 @@ void SetNumber(int position, int value, hal::EverloopImage *image) {
 
 int main() {
   int last_integer = 0;
-  hal::WishboneBus bus;
-  bus.SpiInit();
+  hal::MatrixIOBus bus;
+  bus.Init();
   hal::Everloop everloop;
-  hal::EverloopImage image;
-
+  hal::EverloopImage image(bus.MatrixLeds());
   everloop.Setup(&bus);
 
   struct ifaddrs *ifaddr_struct = NULL;

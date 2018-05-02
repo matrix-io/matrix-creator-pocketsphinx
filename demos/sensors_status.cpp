@@ -30,13 +30,13 @@
 #include "matrix_hal/pressure_sensor.h"
 #include "matrix_hal/uv_data.h"
 #include "matrix_hal/uv_sensor.h"
-#include "matrix_hal/wishbone_bus.h"
+#include "matrix_hal/matrixio_bus.h"
 
 namespace hal = matrix_hal;
 
 int main() {
-  hal::WishboneBus bus;
-  bus.SpiInit();
+  hal::MatrixIOBus bus;
+  bus.Init();
 
   hal::IMUSensor imu_sensor;
   imu_sensor.Setup(&bus);

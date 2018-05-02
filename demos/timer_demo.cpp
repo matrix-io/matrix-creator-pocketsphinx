@@ -25,7 +25,7 @@
 #include "matrix_hal/everloop_image.h"
 #include "matrix_hal/everloop.h"
 #include "matrix_hal/gpio_control.h"
-#include "matrix_hal/wishbone_bus.h"
+#include "matrix_hal/matrixio_bus.h"
 
 namespace hal = matrix_hal;
 
@@ -64,15 +64,15 @@ int main(int argc, char *argv[]) {
   const int speakerpin = 15; // GPIO pin for speaker
   const int outputmode = 1;
 
-  hal::WishboneBus bus;
-  bus.SpiInit();
+  hal::MatrixIOBus bus;
+  bus.Init();
 
   hal::GPIOControl gpio;
   gpio.Setup(&bus);
   gpio.SetMode(speakerpin, outputmode);
 
   hal::Everloop everloop;
-  hal::EverloopImage img;
+  hal::EverloopImage img(bus.MatrixLeds());
   everloop.Setup(&bus);
 
   unsigned counter = 0;
