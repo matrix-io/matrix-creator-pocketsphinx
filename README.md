@@ -1,5 +1,7 @@
 # Pocketsphinx demo
 
+This repository has a simple examples using MATRIX Devices and PhocketSphinx. It was tested on **Raspbian Stretch**
+
 ## Compile from sources
 
 ### Step 1: MATRIXIO Software
