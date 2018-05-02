@@ -1,37 +1,22 @@
 # Pocketsphinx demo
 
-## Installation
+## Compile from sources
 
 ### Raspbian Dependencies 
 
-Before, please install **MALOS** service on your `RaspberryPi3` and perform device reboot: 
+#### MATRIX Devices Software
 
 ``` bash 
 curl https://apt.matrix.one/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.matrix.one/raspbian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/matrixlabs.list
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt install matrixio-malos-wakeword git build-essential cmake
-reboot
+sudo apt update
+sudo apt upgrade
+
+sudo apt install matrixio-creator-init matrixio-kernel-modules libmatrixio-creator-hal-dev matrixio-pocketsphinx
+sudo reboot
 ```
 
-### Testing that MALOS is running
-
-``` bash
-ps aux | grep -i malos
-```
-output:
-``` bash
-root       561  5.7  0.9 763616  8908 ?        Ssl  12:26   0:06 /usr/bin/malos
-root       562  0.0  0.5 122220  5640 ?        Ssl  12:26   0:00 /usr/bin/malos_wakeword
-```
-**NOTE:** you can stop `malos_wakeword`, for pocketsphinx tests you don't need it. It's only for installing dependencies like pocketsphinx and sphinxbase. If you want to see more info about [malos_wakeword](https://github.com/matrix-io/matrix-malos-wakeword/blob/master/README.md)
-
-``` bash
-sudo service matrixio-malos-wakeword stop
-```
-
-### Building PocketSphinx demos
+#### Building PocketSphinx demos
 ``` 
 git clone https://github.com/matrix-io/matrix-creator-pocketsphinx.git
 cd matrix-creator-pocketsphinx
@@ -51,11 +36,8 @@ tar zxf TAR6706.tgz -C assets
 ### Run DEMO:
 on build/demos:
 ```
-./pocketsphinx_demo -keyphrase "MATRIX" -kws_threshold 1e-20 -dict assets/6706.dic -lm assets/6706.lm -inmic yes -adcdev mic_channel8
+./pocketsphinx_demo -keyphrase "MATRIX" -kws_threshold 1e-20 -dict assets/6706.dic -lm assets/6706.lm -inmic yes
 ``` 
-- *mic_channel8* (all microphones array)
-- *mic_channelX* (only X microphone)
-
 and try it with executing commands with your voice like this: 
 
 - `matrix everloop`
