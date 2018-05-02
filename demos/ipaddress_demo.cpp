@@ -15,17 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <unistd.h>
-#include <iostream>
-#include <sys/types.h>
+#include <arpa/inet.h>
 #include <ifaddrs.h>
 #include <netinet/in.h>
-#include <arpa/inet.h>
 #include <string.h>
+#include <sys/types.h>
+#include <unistd.h>
 #include <cstring>
+#include <iostream>
 
-#include "matrix_hal/everloop_image.h"
 #include "matrix_hal/everloop.h"
+#include "matrix_hal/everloop_image.h"
 #include "matrix_hal/matrixio_bus.h"
 
 namespace hal = matrix_hal;
@@ -75,8 +75,7 @@ int main() {
       }
     }
   }
-  if (ifaddr_struct != nullptr)
-    freeifaddrs(ifaddr_struct);
+  if (ifaddr_struct != nullptr) freeifaddrs(ifaddr_struct);
 
   for (hal::LedValue &led : image.leds) {
     led.red = 0;

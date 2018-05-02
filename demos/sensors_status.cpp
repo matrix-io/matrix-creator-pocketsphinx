@@ -15,22 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <unistd.h>
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
-#include <unistd.h>
 
 #include "matrix_hal/fw_data.h"
 #include "matrix_hal/humidity_data.h"
 #include "matrix_hal/humidity_sensor.h"
 #include "matrix_hal/imu_data.h"
 #include "matrix_hal/imu_sensor.h"
+#include "matrix_hal/matrixio_bus.h"
 #include "matrix_hal/mcu_firmware.h"
 #include "matrix_hal/pressure_data.h"
 #include "matrix_hal/pressure_sensor.h"
 #include "matrix_hal/uv_data.h"
 #include "matrix_hal/uv_sensor.h"
-#include "matrix_hal/matrixio_bus.h"
 
 namespace hal = matrix_hal;
 

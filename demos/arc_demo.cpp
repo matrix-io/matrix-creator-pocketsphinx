@@ -18,8 +18,8 @@
 #include <unistd.h>
 #include <cmath>
 
-#include "matrix_hal/everloop_image.h"
 #include "matrix_hal/everloop.h"
+#include "matrix_hal/everloop_image.h"
 #include "matrix_hal/matrixio_bus.h"
 
 namespace hal = matrix_hal;

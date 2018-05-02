@@ -16,15 +16,15 @@
  */
 
 #include <unistd.h>
-#include <valarray>
 #include <cstdlib>
 #include <iostream>
+#include <valarray>
 
-#include "matrix_hal/everloop_image.h"
 #include "matrix_hal/everloop.h"
-#include "matrix_hal/uv_sensor.h"
-#include "matrix_hal/uv_data.h"
+#include "matrix_hal/everloop_image.h"
 #include "matrix_hal/matrixio_bus.h"
+#include "matrix_hal/uv_data.h"
+#include "matrix_hal/uv_sensor.h"
 
 /* UV Index
 
