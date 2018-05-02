@@ -2,7 +2,7 @@
 
 ## Compile from sources
 
-#### MATRIXIO Software
+### Step 1: MATRIXIO Software
 
 ``` bash 
 curl https://apt.matrix.one/doc/apt-key.gpg | sudo apt-key add -
@@ -14,14 +14,14 @@ sudo apt install matrixio-creator-init matrixio-kernel-modules libmatrixio-creat
 sudo reboot
 ```
 
-#### Building PocketSphinx demos
+### Step 2: Building PocketSphinx demos
 ``` 
 git clone https://github.com/matrix-io/matrix-creator-pocketsphinx.git
 cd matrix-creator-pocketsphinx
 mkdir build && cd build && cmake .. && make -j $(nproc)
 ```
 
-### Install testing voice commands:
+### Step 3: Install testing voice commands:
 Download sample language and dictionary from [here](https://drive.google.com/file/d/0B3lA7p7SjZu-YUJxYmIwcnh4Qlk/view?usp=sharing) and transfer it to your Pi on `matrix-creator-pocketsphinx/build/demos` directory and then extract it:
 
 ``` bash
@@ -31,7 +31,7 @@ tar zxf TAR6706.tgz -C assets
 
 **NOTE**: Optional, you can make new models [explanation below](https://github.com/matrix-io/matrix-creator-pocketsphinx#optional-custom-lenguage-and-phrases-for-recognition)
 
-### Run DEMO:
+### Step 4: Run DEMO:
 on build/demos:
 ```
 ./pocketsphinx_demo -keyphrase "MATRIX" -kws_threshold 1e-20 -dict assets/6706.dic -lm assets/6706.lm -inmic yes
@@ -43,7 +43,7 @@ and try it with executing commands with your voice like this:
 - `matrix clear`
 - ...
 
-#### (optional) Custom lenguage and phrases for recognition 
+### (optional) Custom lenguage and phrases for recognition 
 
 + Make a text plane like this: 
 ``` 
