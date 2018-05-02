@@ -2,9 +2,7 @@
 
 ## Compile from sources
 
-### Raspbian Dependencies 
-
-#### MATRIX Devices Software
+#### MATRIXIO Software
 
 ``` bash 
 curl https://apt.matrix.one/doc/apt-key.gpg | sudo apt-key add -
