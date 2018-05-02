@@ -16,15 +16,15 @@
  */
 
 #include <unistd.h>
-#include <valarray>
 #include <cstdlib>
 #include <iostream>
+#include <valarray>
 
-#include "matrix_hal/everloop_image.h"
 #include "matrix_hal/everloop.h"
-#include "matrix_hal/uv_sensor.h"
+#include "matrix_hal/everloop_image.h"
+#include "matrix_hal/matrixio_bus.h"
 #include "matrix_hal/uv_data.h"
-#include "matrix_hal/wishbone_bus.h"
+#include "matrix_hal/uv_sensor.h"
 
 /* UV Index
 
@@ -59,8 +59,8 @@ int main() {
       {0.0, {0, 255, 0, 0}}     /* Green  "Low" */
   };
 
-  hal::WishboneBus bus;
-  bus.SpiInit();
+  hal::MatrixIOBus bus;
+  bus.Init();
 
   hal::UVSensor uv_sensor;
   uv_sensor.Setup(&bus);
@@ -68,7 +68,7 @@ int main() {
   hal::Everloop everloop;
   everloop.Setup(&bus);
 
-  hal::EverloopImage image1d;
+  hal::EverloopImage image1d(bus.MatrixLeds());
   hal::UVData uv_data;
 
   while (true) {

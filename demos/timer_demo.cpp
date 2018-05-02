@@ -15,22 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <unistd.h>
 #include <chrono>
 #include <ctime>
 #include <iostream>
 #include <sstream>
-#include <unistd.h>
 
-
-#include "matrix_hal/everloop_image.h"
 #include "matrix_hal/everloop.h"
+#include "matrix_hal/everloop_image.h"
 #include "matrix_hal/gpio_control.h"
-#include "matrix_hal/wishbone_bus.h"
+#include "matrix_hal/matrixio_bus.h"
 
 namespace hal = matrix_hal;
 
-void clear(hal::EverloopImage *img) {
-  for (hal::LedValue &led : img->leds) {
+void clear(hal::EverloopImage *image1d) {
+  for (hal::LedValue &led : image1d->leds) {
     led.red = 0;
     led.green = 0;
     led.blue = 0;
@@ -38,41 +37,42 @@ void clear(hal::EverloopImage *img) {
   }
 }
 
-void setColor(hal::EverloopImage *img, int pos, int r, int g, int b, int w) {
-  img->leds[pos % 35].red = r;
-  img->leds[pos % 35].green = g;
-  img->leds[pos % 35].blue = b;
-  img->leds[pos % 35].white = w;
+void setColor(hal::EverloopImage *image1d, int pos, int r, int g, int b,
+              int w) {
+  image1d->leds[pos % image1d->leds.size()].red = r;
+  image1d->leds[pos % image1d->leds.size()].green = g;
+  image1d->leds[pos % image1d->leds.size()].blue = b;
+  image1d->leds[pos % image1d->leds.size()].white = w;
 }
 
-void drawProgress(hal::EverloopImage *img, unsigned counter) {
-  int min = counter % 35;
-  unsigned green = 35;
+void drawProgress(hal::EverloopImage *image1d, unsigned counter) {
+  int min = counter % image1d->leds.size();
+  unsigned green = image1d->leds.size();
   for (int y = 0; y <= min; y++) {
-    setColor(img, y, y * 2, green, 0, 0);
-    green = 35 - y;
+    setColor(image1d, y, y * 2, green, 0, 0);
+    green = image1d->leds.size() - y;
   }
 }
 
-void drawSeconds(hal::EverloopImage *img, unsigned seconds) {
-  int sec = seconds % 35;
-  setColor(img, sec, 0, 0, 40, 0);
+void drawSeconds(hal::EverloopImage *image1d, unsigned seconds) {
+  int sec = seconds % image1d->leds.size();
+  setColor(image1d, sec, 0, 0, 40, 0);
 }
 
 int main(int argc, char *argv[]) {
-  const unsigned ticks = 16; // Beeps on alarm
-  const int speakerpin = 15; // GPIO pin for speaker
+  const unsigned ticks = 16;  // Beeps on alarm
+  const int speakerpin = 15;  // GPIO pin for speaker
   const int outputmode = 1;
 
-  hal::WishboneBus bus;
-  bus.SpiInit();
+  hal::MatrixIOBus bus;
+  bus.Init();
 
   hal::GPIOControl gpio;
   gpio.Setup(&bus);
   gpio.SetMode(speakerpin, outputmode);
 
+  hal::EverloopImage image1d(bus.MatrixLeds());
   hal::Everloop everloop;
-  hal::EverloopImage img;
   everloop.Setup(&bus);
 
   unsigned counter = 0;
@@ -82,18 +82,18 @@ int main(int argc, char *argv[]) {
   bool start_alarm = false;
 
   // configuration time (default 3min)
-  float config_time = 180.0 / 35.0;
+  float config_time = 180.0 / image1d.leds.size();
   if (argc == 2) {
     std::istringstream iss(argv[1]);
     int val;
     if (iss >> val) {
       std::cout << "config time set to: " << argv[1] << " secs.\n";
-      config_time = (float)val / 35.0;
+      config_time = (float)(val / image1d.leds.size());
       std::cout << "led config time: " << config_time << "\n";
     }
   }
 
-  clear(&img);
+  clear(&image1d);
   gpio.SetGPIOValue(speakerpin, 0);
 
   std::chrono::time_point<std::chrono::system_clock> smin, now, ssec, sbeep;
@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
       ++counter;
     }
 
-    if (elapsed_seconds.count() > config_time / 35.) {
+    if (elapsed_seconds.count() > config_time / image1d.leds.size()) {
       ssec = std::chrono::system_clock::now();
       ++seconds;
     }
@@ -122,31 +122,31 @@ int main(int argc, char *argv[]) {
       tick++;
     }
 
-    if ((counter % 35) == 0 && tick < ticks) {
+    if ((counter % image1d.leds.size()) == 0 && tick < ticks) {
       gpio.SetGPIOValue(speakerpin, speaker);
       start_alarm = true;
     } else {
       gpio.SetGPIOValue(speakerpin, 0);
     }
 
-    if ((counter % 35) == 34) {
+    if ((counter % image1d.leds.size()) == image1d.leds.size() - 1) {
       start_alarm = false;
       tick = 0;
     }
 
     if (start_alarm && tick < ticks) {
       if (speaker) {
-        clear(&img);
+        clear(&image1d);
       } else {
-        drawProgress(&img, counter);
-        drawSeconds(&img, seconds);
+        drawProgress(&image1d, counter);
+        drawSeconds(&image1d, seconds);
       }
     } else {
-      clear(&img);
-      drawProgress(&img, counter);
-      drawSeconds(&img, seconds);
+      clear(&image1d);
+      drawProgress(&image1d, counter);
+      drawSeconds(&image1d, seconds);
     }
-    everloop.Write(&img);
+    everloop.Write(&image1d);
   }
 
   return 0;

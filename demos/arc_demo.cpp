@@ -18,19 +18,19 @@
 #include <unistd.h>
 #include <cmath>
 
-#include "matrix_hal/everloop_image.h"
 #include "matrix_hal/everloop.h"
-#include "matrix_hal/wishbone_bus.h"
+#include "matrix_hal/everloop_image.h"
+#include "matrix_hal/matrixio_bus.h"
 
 namespace hal = matrix_hal;
 
 int main() {
-  hal::WishboneBus bus;
+  hal::MatrixIOBus bus;
 
-  bus.SpiInit();
+  bus.Init();
 
   hal::Everloop everloop;
-  hal::EverloopImage image1d;
+  hal::EverloopImage image1d(bus.MatrixLeds());
 
   everloop.Setup(&bus);
 
